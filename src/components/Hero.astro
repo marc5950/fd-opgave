@@ -2,29 +2,98 @@
 import { Image } from "astro:assets";
 import Services from "./Services.astro";
 import CEOImage from "@assets/images/ceo.png";
+import Pattern from "@assets/images/pattern.svg";
 ---
 
 <section class="hero">
-  <div class="hero-content">
-    <h1>Empowering Your Business Growth</h1>
-    <p>
-      Discover tailored strategies and expert insights to take your business to
-      the next level. Let us help you navigate challenges and achieve
-      sustainable success.
-    </p>
-    <a href="#0">Book a Meeting</a>
+  <div class="hero-inner">
+    <Image class="pattern" src={Pattern} alt="" />
+    <div class="hero-content">
+      <h1>Empowering Your Business Growth</h1>
+      <p>
+        Discover tailored strategies and expert insights to take your business
+        to the next level. Let us help you navigate challenges and achieve
+        sustainable success.
+      </p>
+      <a
+        href="#0"
+        class="button01"
+        style="--button-color01: var(--text-light); --button-color02: var(--primary-color03);"
+        >Book a Meeting</a
+      >
+    </div>
+    <Image class="image" src={CEOImage} alt="CEO" />
   </div>
-  <Image src={CEOImage} alt="CEO" />
-
-  <Services />
+  <div class="services">
+    <Services />
+  </div>
 </section>
 
 <style>
   /* Styles her */
   @layer components {
     .hero {
-      background-color: #f3f4f6;
-      padding: 2rem;
+      display: grid;
+      grid-template-rows: repeat(6, 1fr);
+      justify-items: center;
+      padding-top: 70px;
+      h1 {
+        color: var(--text-light);
+      }
+      p {
+        color: var(--text-light);
+      }
+      .hero-inner {
+        background-color: var(--primary-color03);
+
+        grid-column: 1 / 1;
+        grid-row: 1 / 5;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns:
+          1fr minmax(0, calc(600px - 1rem)) minmax(0, calc(600px - 1rem))
+          1fr;
+        .pattern {
+          margin-top: 2rem;
+          height: 50% !important;
+        }
+        .hero-content {
+          margin-top: 2rem;
+          display: flex;
+          flex-direction: column;
+          gap: 29px;
+        }
+        .image {
+          grid-column: 3 / 5;
+          height: 100% !important;
+        }
+        @media (max-width: 900px) {
+          grid-template-columns: 1fr minmax(0, 600px) 1fr;
+          .image {
+            grid-column: 1 / 4;
+            grid-row: 2 / 3;
+            length: 100% !important;
+            height: auto !important;
+          }
+        }
+      }
+      .services {
+        grid-column: 1 / 1;
+        grid-row: 4 / 6;
+        margin: 1rem 2rem;
+      }
+      @media (max-width: 900px) {
+        grid-template-rows: 1fr 1fr;
+        .services {
+          grid-column: 1 / 1;
+          grid-row: 2 / 3;
+          margin: 1rem 2rem;
+        }
+        .hero-inner {
+          grid-column: 1 / 1;
+          grid-row: 1 / 2;
+        }
+      }
     }
   }
 </style>

@@ -1,0 +1,62 @@
+<div class="header-wrapper">
+  <header>
+    <h2>AskExpert</h2>
+    <nav>
+      <ul>
+        <li><a href="#0">Home</a></li>
+        <li><a href="#0">Case Study</a></li>
+        <li><a href="#0">Team</a></li>
+        <li><a href="#0">About</a></li>
+      </ul>
+    </nav>
+    <a class="button02" href="#0">Login</a>
+  </header>
+</div>
+<style>
+  @layer components {
+    .header-wrapper {
+      width: 100vw;
+      position: fixed;
+      z-index: 100;
+      background-color: rgba(27, 27, 27, 0.91);
+      backdrop-filter: blur(10.5px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    header {
+      max-width: 1200px;
+      margin: 0rem 2rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      h2 {
+        color: var(--text-light);
+        font-size: var(--heading05);
+        margin: 0;
+      }
+      nav ul {
+        display: flex;
+        gap: 1.5rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 17.728px;
+          font-weight: 400;
+          line-height: 160%; /* 28.365px */
+          &:hover {
+            color: var(--primary-color01);
+          }
+        }
+      }
+      .button02 {
+        padding: 4px 16px;
+      }
+    }
+  }
+</style>
