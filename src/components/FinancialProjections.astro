@@ -5,7 +5,10 @@ import DynamicIcon from "./helpers/DynamicIcon.astro";
 console.log(fP);
 ---
 
-<section class="financial-projections-container">
+<section
+  class="container"
+  style="--container-background: var(--secondary-color01)"
+>
   <div class="financial-projections">
     <div class="financial-projections-content">
       <div class="carousel-info">
@@ -13,14 +16,18 @@ console.log(fP);
         <p>{fP.subtitle}</p>
       </div>
       <div class="carousel-nav">
-        <DynamicIcon name="arrow-left" class="arrow-left" />
-        <DynamicIcon name="arrow--right" class="arrow-right" />
+        <a href="#fp-prev" class="arrow-left" aria-label="Previous slide">
+          <DynamicIcon name="arrow-left" />
+        </a>
+        <a href="#fp-next" class="arrow-right" aria-label="Next slide">
+          <DynamicIcon name="arrow--right" />
+        </a>
       </div>
     </div>
-    <ul>
+    <ul id="fp-carousel">
       {
-        fP.values.map((values) => (
-          <li>
+        fP.values.map((values, i) => (
+          <li id={`fp-${i}`}>
             <DynamicIcon name={values.icon} />
             <h3>{values.title}</h3>
             <p>{values.description}</p>
@@ -33,59 +40,50 @@ console.log(fP);
 
 <style>
   @layer components {
-    .financial-projections-container {
-      background: var(--secondary-color01);
-      padding-block: 4rem;
+    .financial-projections {
+      margin: 0 auto;
+      padding: 2rem 0;
+      grid-column: full;
       display: grid;
-      grid-template-columns:
-        [full-start]
-        1fr
-        [content]
-        minmax(0, 1200px)
-        1fr
-        [full-end];
-      column-gap: 1rem;
-      > * {
+      grid-template-columns: inherit;
+      row-gap: 1rem;
+      .financial-projections-content {
         grid-column: content;
-      }
-
-      .financial-projections {
-        margin: 0 auto;
-        padding: 2rem 0;
-        grid-column: full;
-        display: grid;
-        grid-template-columns: inherit;
-        row-gap: 3rem;
-        .financial-projections-content {
-          grid-column: content;
-          display: flex;
-          justify-content: space-between;
-          align-items: end;
-          margin-bottom: 2rem;
-          .carousel-info {
-            p {
-              max-width: 65ch;
-              --text-color: var(--text-gray);
-            }
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        margin-bottom: 2rem;
+        .carousel-info {
+          p {
+            max-width: 65ch;
+            --text-color: var(--text-gray);
           }
-          .carousel-nav {
+        }
+        .carousel-nav {
+          display: flex;
+          gap: 1rem;
+          a {
             display: flex;
-            gap: 1rem;
-            .arrow-left,
-            .arrow-right {
-              padding: 0.7rem;
-              width: 3rem;
-              height: 3rem;
-              background: var(--primary-color03);
-              color: var(--secondary-color02);
-              border-radius: 50%;
-              cursor: pointer;
-              transition: all 0.3s ease;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem;
+            width: 3rem;
+            height: 3rem;
+            background: var(--primary-color03);
+            color: var(--secondary-color02);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
 
-              &:hover {
-                background: var(--primary-color01);
-                color: var(--primary-color03);
-              }
+            svg {
+              width: 1.2rem;
+              height: 1.2rem;
+            }
+
+            &:hover {
+              background: var(--primary-color01);
+              color: var(--primary-color03);
             }
           }
         }
@@ -97,11 +95,18 @@ console.log(fP);
       display: flex;
       gap: 2rem;
       overflow-x: auto;
+      overflow-y: hidden;
       list-style: none;
       scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
       padding-inline: max(1rem, 50% - 1200px / 2);
       padding-block-end: 1rem;
       padding-top: 1rem;
+
+      /* Scroll-bar style */
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-color03) transparent;
+
       li {
         display: flex;
         flex-basis: min(700px, 90%);
@@ -143,3 +148,26 @@ console.log(fP);
     }
   }
 </style>
+
+<script>
+  // Horizontal scroll with mouse wheel
+  const carousel = document.querySelector("#fp-carousel");
+
+  // Arrow navigation
+  const leftArrow = document.querySelector(".arrow-left");
+  const rightArrow = document.querySelector(".arrow-right");
+
+  if (leftArrow && rightArrow && carousel) {
+    const scrollAmount = 720; // scroll one card width + gap
+
+    leftArrow.addEventListener("click", (e) => {
+      e.preventDefault();
+      carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+
+    rightArrow.addEventListener("click", (e) => {
+      e.preventDefault();
+      carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+  }
+</script>

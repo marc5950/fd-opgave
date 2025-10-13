@@ -52,6 +52,16 @@ p {
   line-height: 147.5%;
 }
 
+a {
+  font-family: Lato;
+  font-size: var(--body-default);
+  color: var(--text-color, var(--text-dark));
+  font-style: normal;
+  font-weight: 600;
+  line-height: 160%;
+  text-decoration: none;
+}
+
 .button01 {
   display: flex;
   padding: 16px 33px;
@@ -97,5 +107,22 @@ p {
     border: 2px solid #ffe5a2;
     background: #ffe5a2;
     color: var(--text-dark);
+  }
+}
+
+.container {
+  background: var(--container-background, --secondary-color02);
+  padding-block: 4rem;
+  display: grid;
+  grid-template-columns:
+    [full-start]
+    1fr
+    [content]
+    minmax(0, 1200px)
+    1fr
+    [full-end];
+  column-gap: 2rem;
+  > * {
+    grid-column: content;
   }
 }

@@ -1,0 +1,153 @@
+---
+import experience from "@data/experience.json";
+console.log(experience);
+---
+
+<section
+  class="container"
+  style="--container-background: var(--primary-color01)"
+>
+  <div class="experience">
+    <div class="experience-content">
+      <p>EXPERIENCE</p>
+      <h2>{experience.heading}</h2>
+      <p>{experience.subheading}</p>
+    </div>
+    <ul>
+      {
+        experience.stats.map((stat) => (
+          <li>
+            <div class="stat" style={`--percent: ${stat.value}`} />
+            <h3>{stat.label}</h3>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .experience {
+    display: grid;
+    grid-auto-flow: column;
+  }
+  .experience-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  ul {
+    display: flex;
+  }
+  li {
+    --bg-color: var(--primary-color01);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: min(400px, 100% - 1rem);
+    background: var(--bg-color);
+    h3 {
+      --font-size: var(--heading06);
+    }
+    .stat::after {
+      font-size: var(--heading02);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .experience {
+      grid-auto-flow: row;
+      row-gap: 2rem;
+      justify-items: center;
+      text-align: center;
+    }
+    ul {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+  }
+
+  @property --p {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 0%;
+  }
+  @property --num {
+    syntax: "<integer>";
+    inherits: true;
+    initial-value: 0;
+  }
+
+  @keyframes progress {
+    from {
+      --p: 0%;
+      --num: 0;
+    }
+    to {
+      --p: var(--target-p);
+      --num: var(--target-num);
+    }
+  }
+
+  .stat {
+    --target-p: calc(var(--percent) * 1%);
+    --target-num: var(--percent);
+    --p: 0%;
+    --num: 0;
+    --border-width: 5px;
+    --border-color: #ffffff;
+    --border-bg: #daae3c;
+
+    /* Cirklen, lavet med conic-gradient */
+    aspect-ratio: 1;
+    width: 150px;
+    border-radius: calc(Infinity * 1px);
+    border: var(--border-width) solid #0000;
+    background:
+      radial-gradient(
+          circle at 50% calc(var(--border-width) / 2),
+          var(--border-color) calc(var(--border-width) / 2),
+          transparent 0
+        )
+        border-box,
+      linear-gradient(var(--bg-color) 0 0) padding-box,
+      conic-gradient(var(--border-color) var(--p), var(--border-bg) 0)
+        border-box;
+
+    display: grid;
+    counter-reset: count var(--num);
+
+    /* Scroll-driven animation */
+    animation: progress auto ease-out both;
+    animation-timeline: view();
+    animation-range: entry 25% cover 45%;
+
+    &::before,
+    &::after {
+      grid-area: 1 / 1;
+    }
+
+    /* Tæller i midten */
+    &::after {
+      content: counter(count) "%";
+      place-self: center;
+    }
+    /* Hvid cirkel rundt om */
+    &::before {
+      content: "";
+      aspect-ratio: 1;
+      border-radius: calc(Infinity * 1px);
+      width: calc(var(--border-width) * 3);
+      background: #000;
+      outline: 3px solid #fff;
+      outline-offset: -2px;
+      offset-path: content-box;
+      offset-distance: var(--p);
+      offset-anchor: 50% calc(50% - var(--border-width) / 2);
+    }
+  }
+</style>
