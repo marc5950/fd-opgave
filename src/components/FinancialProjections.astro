@@ -45,13 +45,14 @@ console.log(fP);
       padding: 2rem 0;
       grid-column: full;
       display: grid;
-      grid-template-columns: inherit;
+      grid-template-columns: subgrid;
       row-gap: 1rem;
       .financial-projections-content {
         grid-column: content;
         display: flex;
         justify-content: space-between;
         align-items: end;
+        gap: 2rem;
         margin-bottom: 2rem;
         .carousel-info {
           p {

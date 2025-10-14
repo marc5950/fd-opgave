@@ -1,0 +1,47 @@
+---
+import HeroBgWrapper from "@components/helpers/HeroBgWrapper.astro";
+import Layout from "@layouts/Layout.astro";
+import CoreValues from "@components/CoreValues.astro";
+---
+
+<Layout title="About Us - AskExperts">
+  <HeroBgWrapper imagePath="about-hero.jpg" class="hero-bg">
+    <section
+      class="container"
+      style="--container-background: none; padding: 4rem 0;"
+    >
+      <div>
+        <p>About</p>
+        <h2 style="--font-size: var(--heading01)">
+          Creative Services For Boost Your Business Growth
+        </h2>
+      </div>
+    </section>
+  </HeroBgWrapper>
+  <CoreValues surface="secondary" />
+</Layout>
+
+<style>
+  section {
+    min-height: 65vh;
+  }
+  div {
+    margin-top: calc(73px + 2rem);
+    display: inline-flex;
+    padding: 48px 60px 58px 60px;
+    flex-direction: column;
+    max-width: 100ch;
+    height: fit-content;
+    gap: 10px;
+    border-radius: 29px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5.5px);
+  }
+  p {
+    text-transform: uppercase;
+    background: var(--primary-color01);
+    width: fit-content;
+    padding: 0 15px;
+    border-radius: 20px;
+  }
+</style>

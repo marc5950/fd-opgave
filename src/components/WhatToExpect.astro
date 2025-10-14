@@ -4,32 +4,34 @@ import photo from "@assets/images/photo.jpg";
 import DynamicIcon from "./helpers/DynamicIcon.astro";
 ---
 
-<section class="what-to-expect">
-  <figure>
-    <Image src={photo} alt="" class="pattern" />
-  </figure>
-  <div class="what-to-expect-content">
-    <p>WE'LL WORK WITH YOU</p>
-    <h2>What to expect</h2>
-    <p>
-      Our collaboration is built on transparency, efficiency, and measurable
-      results. Together, we create strategies tailored to your unique needs and
-      goals.
-    </p>
-    <div class="steps">
-      <div class="step">
-        <DynamicIcon name="checkmark" />
-        <h3>
-          Collaborate to build actionable strategies that drive sustainable
-          growth and deliver tangible outcomes.
-        </h3>
-      </div>
-      <div class="step">
-        <DynamicIcon name="checkmark" />
-        <h3>
-          Identify opportunities to optimize processes and implement impactful
-          solutions with measurable results.
-        </h3>
+<section class="container">
+  <div class="what-to-expect">
+    <figure>
+      <Image src={photo} alt="" class="pattern" />
+    </figure>
+    <div class="what-to-expect-content">
+      <p>WE'LL WORK WITH YOU</p>
+      <h2>What to expect</h2>
+      <p>
+        Our collaboration is built on transparency, efficiency, and measurable
+        results. Together, we create strategies tailored to your unique needs
+        and goals.
+      </p>
+      <div class="steps">
+        <div class="step">
+          <DynamicIcon name="checkmark" />
+          <h3>
+            Collaborate to build actionable strategies that drive sustainable
+            growth and deliver tangible outcomes.
+          </h3>
+        </div>
+        <div class="step">
+          <DynamicIcon name="checkmark" />
+          <h3>
+            Identify opportunities to optimize processes and implement impactful
+            solutions with measurable results.
+          </h3>
+        </div>
       </div>
     </div>
   </div>
@@ -42,7 +44,6 @@ import DynamicIcon from "./helpers/DynamicIcon.astro";
       max-width: 1200px;
       grid-template-columns: 1fr 1fr;
       margin: 0rem auto;
-      padding: 4rem 2rem;
       gap: 4rem;
 
       figure {
@@ -127,7 +128,6 @@ import DynamicIcon from "./helpers/DynamicIcon.astro";
       }
       @media (max-width: 900px) {
         grid-template-columns: 1fr;
-        margin: 4rem 2rem;
         figure {
           &::before {
             margin-bottom: 2rem;

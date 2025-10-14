@@ -3,25 +3,29 @@
 import coreValues from "@data/coreValues.json";
 console.log(coreValues);
 import DynamicIcon from "./helpers/DynamicIcon.astro";
+
+// Props
+const { surface = "primary" } = Astro.props;
 ---
 
 <section
   class="container"
-  style="--container-background: var(--primary-color03)"
+  data-surface={surface}
+  style="--container-background: var(--core-bg)"
 >
   <div class="core-values">
     <div class="core-values-content">
       <div class="core-values-info">
-        <p style="--text-color: var(--text-light); text-transform: uppercase;">
+        <p style="--text-color: var(--core-text); text-transform: uppercase;">
           Growing with our Clients
         </p>
 
-        <h2 style="--text-color: var(--text-light)">{coreValues.title}</h2>
-        <p style="--text-color: var(--text-light)">{coreValues.subtitle}</p>
+        <h2 style="--text-color: var(--core-text)">{coreValues.title}</h2>
+        <p style="--text-color: var(--core-text)">{coreValues.subtitle}</p>
       </div>
       <a
         class="button01"
-        style="--button-color01: var(--secondary-color01); --button-color02: var(--text-dark);"
+        style="--button-color01: var(--core-btn-bg); --button-color02: var(--core-btn-text);"
         href={coreValues.button.link}>{coreValues.button.text}</a
       >
     </div>
@@ -46,6 +50,19 @@ import DynamicIcon from "./helpers/DynamicIcon.astro";
 </section>
 
 <style>
+  [data-surface="primary"] {
+    --core-text: var(--text-light);
+    --core-bg: var(--primary-color03);
+    --core-btn-bg: var(--secondary-color02);
+    --core-btn-text: var(--text-dark);
+  }
+
+  [data-surface="secondary"] {
+    --core-text: var(--text-dark);
+    --core-bg: var(--secondary-color02);
+    --core-btn-bg: var(--primary-color03);
+    --core-btn-text: var(--text-light);
+  }
   .core-values {
     display: flex;
     flex-direction: column;
