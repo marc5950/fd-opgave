@@ -8,10 +8,10 @@ console.log(experience);
   style="--container-background: var(--primary-color01)"
 >
   <div class="experience">
-    <div class="experience-content">
+    <div class="title">
       <p>EXPERIENCE</p>
       <h2>{experience.heading}</h2>
-      <p>{experience.subheading}</p>
+      <p style="--text-color: var(--text-dark)">{experience.subheading}</p>
     </div>
     <ul>
       {
@@ -30,11 +30,6 @@ console.log(experience);
   .experience {
     display: grid;
     grid-auto-flow: column;
-  }
-  .experience-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
   }
 
   ul {

@@ -1,4 +1,5 @@
 /* Override styles here */
 ul {
   padding-inline-start: 0;
+  list-style: none;
 }

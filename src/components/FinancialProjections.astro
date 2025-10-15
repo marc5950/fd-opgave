@@ -11,7 +11,7 @@ console.log(fP);
 >
   <div class="financial-projections">
     <div class="financial-projections-content">
-      <div class="carousel-info">
+      <div class="title">
         <h2>{fP.title}</h2>
         <p>{fP.subtitle}</p>
       </div>
@@ -27,7 +27,7 @@ console.log(fP);
     <ul id="fp-carousel">
       {
         fP.values.map((values, i) => (
-          <li id={`fp-${i}`}>
+          <li>
             <DynamicIcon name={values.icon} />
             <h3>{values.title}</h3>
             <p>{values.description}</p>
@@ -54,12 +54,6 @@ console.log(fP);
         align-items: end;
         gap: 2rem;
         margin-bottom: 2rem;
-        .carousel-info {
-          p {
-            max-width: 65ch;
-            --text-color: var(--text-gray);
-          }
-        }
         .carousel-nav {
           display: flex;
           gap: 1rem;
@@ -97,7 +91,6 @@ console.log(fP);
       gap: 2rem;
       overflow-x: auto;
       overflow-y: hidden;
-      list-style: none;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       padding-inline: max(1rem, 50% - 1200px / 2);

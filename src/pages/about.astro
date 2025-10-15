@@ -2,6 +2,9 @@
 import HeroBgWrapper from "@components/helpers/HeroBgWrapper.astro";
 import Layout from "@layouts/Layout.astro";
 import CoreValues from "@components/CoreValues.astro";
+import OurVision from "@components/OurVision.astro";
+import OurTeam from "@components/OurTeam.astro";
+import FAQ from "@components/FAQ.astro";
 ---
 
 <Layout title="About Us - AskExperts">
@@ -18,7 +21,10 @@ import CoreValues from "@components/CoreValues.astro";
       </div>
     </section>
   </HeroBgWrapper>
+  <OurVision />
   <CoreValues surface="secondary" />
+  <OurTeam />
+  <FAQ />
 </Layout>
 
 <style>

@@ -16,6 +16,7 @@
   --heading04: 35px;
   --heading05: 30px;
   --heading06: 25px;
+  --body-lg: 18px;
   --body: 16px;
 }
 
@@ -124,5 +125,94 @@ a {
   column-gap: 2rem;
   > * {
     grid-column: content;
+  }
+}
+
+.steps {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+.step {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+  max-width: 50ch;
+  .icon {
+    width: 40px;
+    color: var(--primary-color02);
+  }
+  h3 {
+    text-box-trim: trim-start;
+    --font-size: var(--body);
+    --text-color: var(--text-gray);
+    font-weight: 400;
+    line-height: 116%;
+  }
+}
+
+.bg-pattern {
+  position: relative;
+  &::before {
+    --square-count: 11;
+    --square-size: 1.34rem;
+
+    --_square-size: var(--square-size, 1rem);
+    --_square-half: calc(var(--square-size) / 2);
+    --_square-sum: calc(var(--square-count) * var(--square-size));
+    z-index: -1;
+    content: "";
+    position: absolute;
+    inset: auto -120px 70px auto;
+
+    /*inline-size: calc(var(--square-count) * 1.34rem - .67rem);*/
+    inline-size: calc(
+      round(var(--_square-sum), var(--_square-size)) - var(--_square-half)
+    );
+    aspect-ratio: 1;
+    background: linear-gradient(
+        135deg,
+        #be965d,
+        #976f40,
+        #c99b61,
+        #f0be7b,
+        #ffcb85,
+        #eebc79,
+        #c0935b,
+        #976f40
+      )
+      0 0 / 100% 100%;
+    mask:
+      var(--square-pattern) 0 0 / var(--_square-size) var(--_square-size),
+      var(--square-pattern) var(--_square-half) var(--_square-half) /
+        var(--_square-size) var(--_square-size);
+    /*clip-path: polygon(-3% 0%, 100% 0%, 100% 103%);*/
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: -36px;
+    bottom: -41px;
+    background: var(--primary-color02);
+    width: 150px;
+    height: 100px;
+    border-radius: 10px;
+    z-index: -1;
+  }
+}
+
+.title {
+  max-width: 65ch;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  > p:first-child {
+    text-transform: uppercase;
+    letter-spacing: 2.32px;
+  }
+  > :last-child {
+    --text-color: var(--text-gray);
   }
 }
