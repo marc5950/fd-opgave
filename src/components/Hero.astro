@@ -2,12 +2,11 @@
 import { Image } from "astro:assets";
 import Services from "./Services.astro";
 import CEOImage from "@assets/images/ceo.png";
-import Pattern from "@assets/images/pattern.svg";
 ---
 
 <section class="hero">
   <div class="hero-inner">
-    <Image class="pattern" src={Pattern} alt="" />
+    <figure></figure>
     <div class="hero-content">
       <h1>Empowering Your Business Growth</h1>
       <p>
@@ -58,6 +57,7 @@ import Pattern from "@assets/images/pattern.svg";
           height: 50% !important;
         }
         .hero-content {
+          z-index: 2;
           margin-top: 2rem;
           display: flex;
           flex-direction: column;
@@ -93,6 +93,44 @@ import Pattern from "@assets/images/pattern.svg";
           grid-column: 1 / 1;
           grid-row: 1 / 2;
         }
+      }
+    }
+    figure {
+      position: relative;
+      &::before {
+        --square-count: 15;
+        --square-size: 1.34rem;
+
+        --_square-size: var(--square-size, 1rem);
+        --_square-half: calc(var(--square-size) / 2);
+        --_square-sum: calc(var(--square-count) * var(--square-size));
+        z-index: 1;
+        content: "";
+        position: absolute;
+        inset: auto 60px 234px auto;
+
+        /*inline-size: calc(var(--square-count) * 1.34rem - .67rem);*/
+        inline-size: calc(
+          round(var(--_square-sum), var(--_square-size)) - var(--_square-half)
+        );
+        aspect-ratio: 1;
+        background: linear-gradient(
+            135deg,
+            #be965d,
+            #976f40,
+            #c99b61,
+            #f0be7b,
+            #ffcb85,
+            #eebc79,
+            #c0935b,
+            #976f40
+          )
+          0 0 / 100% 100%;
+        mask:
+          var(--square-pattern) 0 0 / var(--_square-size) var(--_square-size),
+          var(--square-pattern) var(--_square-half) var(--_square-half) /
+            var(--_square-size) var(--_square-size);
+        /*clip-path: polygon(-3% 0%, 100% 0%, 100% 103%);*/
       }
     }
   }
