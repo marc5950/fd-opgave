@@ -1,0 +1,156 @@
+---
+//@ts-nocheck
+import Layout from "@layouts/Layout.astro";
+import employeesData from "@data/employees.json";
+import DynamicIcon from "@components/helpers/DynamicIcon.astro";
+
+export function getStaticPaths() {
+  return employeesData.map((employee) => ({
+    params: { slug: employee.slug },
+    props: { employee },
+  }));
+}
+
+const { employee } = Astro.props;
+---
+
+<Layout title={`${employee.name} - Team - AskExperts`}>
+  <section class="container">
+    <div class="employee-detail">
+      <div class="employee-img">
+        <figure class="bg-pattern">
+          <img src={employee.img} alt={employee.name} />
+        </figure>
+      </div>
+      <div class="employee-content">
+        <div class="employee-info">
+          <div>
+            <h1>{employee.name}</h1>
+            <p class="title">{employee.title}</p>
+          </div>
+          <span></span>
+          <div class="social-links">
+            {
+              employee.social_links.map((link) => (
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  <DynamicIcon name={link.icon} />
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="section">
+          <p>{employee.description_long}</p>
+        </div>
+        <span></span>
+        {
+          employee.past_experience && (
+            <div class="section">
+              <h2>Past Experience</h2>
+              <p>{employee.past_experience}</p>
+            </div>
+          )
+        }
+        <a href="/team" class="button01">Back to Team</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .employee-detail {
+      padding: 4rem 0;
+      display: flex;
+      gap: 3rem;
+    }
+
+    .employee-img img {
+      border-radius: 20px;
+    }
+
+    .bg-pattern {
+      &::before {
+        top: -40px;
+        left: -50px;
+      }
+      &::after {
+        top: -20px;
+        left: -20px;
+      }
+    }
+
+    .employee-info {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+
+      .title {
+        color: var(--text-gray);
+      }
+      span {
+        width: 2px !important;
+        height: 100% !important;
+        background: var(--secondary-color02);
+      }
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: var(--primary-color03);
+        color: var(--text-light);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+      a:hover {
+        background: var(--primary-color01);
+        color: var(--primary-color03);
+      }
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .employee-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      span {
+        height: 2px;
+        width: 100%;
+        background: var(--secondary-color02);
+      }
+    }
+
+    .section h2 {
+      --font-size: var(--heading04);
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      line-height: 1.8;
+      color: var(--text-gray);
+      max-width: 85ch;
+    }
+
+    .button01 {
+      align-self: flex-start;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .employee-detail {
+        flex-direction: column;
+        gap: 2rem;
+      }
+    }
+  </style>
+</Layout>

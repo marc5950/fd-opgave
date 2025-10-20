@@ -7,35 +7,35 @@ import HeroBgWrapper from "@components/helpers/HeroBgWrapper.astro";
 ---
 
 <Layout title="Team - AskExperts">
-  <HeroBgWrapper imagePath="team-hero.jpg" class="hero-bg-team">
+  <HeroBgWrapper imagePath="team-hero.jpg" class="hero-bg">
     <section
       class="container"
       style="--container-background: none; padding: 4rem 0;"
     >
-      <div>
-        <p>About</p>
-        <h2 style="--font-size: var(--heading01)">
-          Creative Services For Boost Your Business Growth
-        </h2>
+      <div class="about-hero">
+        <p>Team</p>
+        <h2 style="--font-size: var(--heading01)">The Consultors</h2>
       </div>
     </section>
   </HeroBgWrapper>
   <section class="container">
-    <div class="title">
-      <h2>Meet Our Great Team</h2>
-      <p>
-        Welcome to our amazing team! We are a group of passionate individuals
-        dedicated to excellence and innovation. Each member brings unique skills
-        and experiences, working together to achieve our goals. Join us as we
-        embark on exciting projects and create lasting impacts.
-      </p>
+    <div class="about-title">
+      <div>
+        <h2>Meet Our Great Team</h2>
+        <p>
+          Welcome to our amazing team! We are a group of passionate individuals
+          dedicated to excellence and innovation. Each member brings unique
+          skills and experiences, working together to achieve our goals. Join us
+          as we embark on exciting projects and create lasting impacts.
+        </p>
+      </div>
       <a class="button01" href="#">Join our team</a>
     </div>
     <ul class="employees">
       {
         employeesData.map((employee) => (
           <li>
-            <a href={employee.slug}>
+            <a href={`/team/${employee.slug}`}>
               <img src={employee.img} alt={employee.name} />
               <p>{employee.title}</p>
             </a>
@@ -58,37 +58,47 @@ import HeroBgWrapper from "@components/helpers/HeroBgWrapper.astro";
 >
 
 <style>
-  .hero-bg-team {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    section {
-      div {
-        margin-top: calc(73px + 2rem);
-        display: inline-flex;
-        padding: 48px 60px 58px 60px;
-        flex-direction: column;
-        max-width: 100ch;
-        height: fit-content;
-        gap: 10px;
-        border-radius: 29px;
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(5.5px);
-      }
-      p {
-        text-transform: uppercase;
-        background: var(--primary-color01);
-        width: fit-content;
-        padding: 0 15px;
-        border-radius: 20px;
-      }
+  .about-hero {
+    margin-top: calc(73px + 2rem);
+    display: inline-flex;
+    padding: 48px 60px 58px 60px;
+    flex-direction: column;
+    max-width: 100ch;
+    height: fit-content;
+    gap: 10px;
+    border-radius: 29px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5.5px);
+
+    p {
+      text-transform: uppercase;
+      background: var(--primary-color01);
+      width: fit-content;
+      padding: 0 15px;
+      border-radius: 20px;
     }
   }
 
   .container {
     row-gap: 2rem;
+  }
+  .about-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    align-items: end;
+    div {
+      display: flex;
+      flex-direction: column;
+      max-width: 65ch;
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      align-items: start;
+      gap: 3rem;
+    }
   }
   .employees {
     display: grid;

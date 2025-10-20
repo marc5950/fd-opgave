@@ -6,11 +6,11 @@ const { imagePath, class: className } = Astro.props;
 const importedImage = `/src/assets/images/${imagePath}`;
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/images/*.{jpeg,jpg,png,gif,webp}"
+  "/src/assets/images/*.{jpeg,jpg,png,gif,webp}",
 );
 if (!images[importedImage])
   throw new Error(
-    `"${importedImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif,webp}"`
+    `"${importedImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif,webp}"`,
   );
 
 const optimizedBackground = await getImage({
@@ -25,3 +25,13 @@ const optimizedBackground = await getImage({
 >
   <slot />
 </section>
+
+<style>
+  .hero-bg {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 400px;
+  }
+</style>
