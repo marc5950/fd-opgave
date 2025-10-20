@@ -1,0 +1,78 @@
+---
+//@ts-nocheck
+import FAQItem from "@data/faq.json";
+console.log(FAQItem);
+---
+
+<section class="container">
+  <div class="faq-content">
+    <p>FAQ</p>
+    <h2>Customer Questions</h2>
+    <ul class="faq-list">
+      {
+        FAQItem.faq.map((item) => (
+          <li>
+            <details name="faq">
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .faq-content {
+    padding: 5rem;
+    border-radius: 30px;
+    background: var(--secondary-color01);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    > p,
+    h2 {
+      text-align: center;
+    }
+  }
+  ul {
+    max-width: 65ch;
+    width: 100%;
+  }
+  details {
+    padding: 1rem 0;
+    border-bottom: 2px solid var(--secondary-color02);
+  }
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    list-style: none;
+    color: #181818;
+    font-family: Cabin;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 116%;
+    padding-bottom: 1rem;
+
+    &::marker {
+      content: "";
+    }
+
+    &::after {
+      content: "+";
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+  }
+
+  details[open] summary::after {
+    content: "−";
+  }
+</style>
