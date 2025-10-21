@@ -17,7 +17,7 @@ import DynamicIcon from "./helpers/DynamicIcon.astro";
     {
       employeesData.slice(0, 3).map((employee) => (
         <li>
-          <a href={employee.slug}>
+          <a href={`/team/${employee.slug}`}>
             <img src={employee.img} alt={employee.name} />
             <p>{employee.title}</p>
           </a>

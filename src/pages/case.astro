@@ -4,13 +4,38 @@ import CaseStudyArticle from "@components/CaseStudyArticle.astro";
 import HeroBgWrapper from "@components/helpers/HeroBgWrapper.astro";
 ---
 
-<Layout>
-  <HeroBgWrapper imagePath="test.png">
-    <header>
-      <p>Case Studies</p>
-      <h1>Taxes & Efficiency</h1>
-    </header>
+<Layout title="Case Study - AskExperts">
+  <HeroBgWrapper imagePath="case-hero.jpg" class="hero-bg">
+    <section class="container" style="padding: 4rem 0;">
+      <div class="case-hero">
+        <p>Case Studies</p>
+        <h2 style="--font-size: var(--heading01)">Taxes & Efficiency</h2>
+      </div>
+    </section>
   </HeroBgWrapper>
 
   <CaseStudyArticle />
 </Layout>
+
+<style>
+  .case-hero {
+    margin-top: calc(73px + 2rem);
+    display: inline-flex;
+    padding: 48px 60px 58px 60px;
+    flex-direction: column;
+    max-width: 100ch;
+    height: fit-content;
+    gap: 10px;
+    border-radius: 29px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5.5px);
+
+    p {
+      text-transform: uppercase;
+      background: var(--primary-color01);
+      width: fit-content;
+      padding: 0 15px;
+      border-radius: 20px;
+    }
+  }
+</style>

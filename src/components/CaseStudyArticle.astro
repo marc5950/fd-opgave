@@ -5,9 +5,11 @@ import caseStudy from "@data/caseStudy.json";
 const { caseName, category, date, image, buttonLabel } = caseStudy.caseDetails;
 ---
 
-<article>
+<article class="container">
   <header>
-    <DynamicImage imagePath={image} altText={caseName} />
+    <figure>
+      <DynamicImage imagePath={image} altText={caseName} />
+    </figure>
     <div class="case-details">
       <dl>
         <div>
@@ -23,45 +25,103 @@ const { caseName, category, date, image, buttonLabel } = caseStudy.caseDetails;
           <dd class="date">{date}</dd>
         </div>
       </dl>
-      <a href="#0" class="button">{buttonLabel}</a>
+      <a href="#0" class="button02">{buttonLabel}</a>
     </div>
   </header>
-  {
-    caseStudy.sections.map((section) => (
-      <section>
-        {caseStudy.sections[0] === section ? (
-          <h2>{section.title}</h2>
-        ) : (
-          <h3>{section.title}</h3>
-        )}
+  <div class="case-studies">
+    {
+      caseStudy.sections.map((section) => (
+        <section>
+          {caseStudy.sections[0] === section ? (
+            <h2>{section.title}</h2>
+          ) : (
+            <h3>{section.title}</h3>
+          )}
 
-        {Array.isArray(section.content) ? (
-          <>
-            {section.content.map((item) => (
-              <p>{item}</p>
-            ))}
-          </>
-        ) : (
-          <p>{section.content}</p>
-        )}
-        {section.highlights && (
-          <ul>
-            {section.highlights.map((highlight) => (
-              <li>{highlight}</li>
-            ))}
-          </ul>
-        )}
-        {section.image && (
-          <DynamicImage
-            imagePath={section.image}
-            altText={section.title}
-            width={600}
-            height={400}
-          />
-        )}
-      </section>
-    ))
-  }
+          {Array.isArray(section.content) ? (
+            <>
+              {section.content.map((item) => (
+                <p>{item}</p>
+              ))}
+            </>
+          ) : (
+            <p>{section.content}</p>
+          )}
+          {section.highlights && (
+            <ul style="list-style: disc; list-style-position: inside; margin: 0;">
+              {section.highlights.map((highlight) => (
+                <li style="padding: 0.4rem 0;">{highlight}</li>
+              ))}
+            </ul>
+          )}
+          {section.image && (
+            <DynamicImage
+              imagePath={section.image}
+              altText={section.title}
+              width={600}
+              height={400}
+            />
+          )}
+        </section>
+      ))
+    }
+  </div>
 </article>
 
-<style></style>
+<style>
+  header {
+    display: flex;
+    flex-direction: column;
+  }
+  figure {
+    img {
+      border-radius: 20px;
+    }
+  }
+  .case-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    background: var(--primary-color03);
+    border-radius: 30px;
+    padding: 53px 60px;
+    width: 100%;
+    max-width: 1028px;
+    margin: -3rem auto 2rem;
+
+    dl {
+      display: flex;
+      gap: 2rem;
+      div {
+        display: flex;
+        flex-direction: column;
+        dt {
+          font-weight: bold;
+          margin-bottom: 0.3rem;
+          color: var(--text-light);
+        }
+        dd {
+          color: var(--text-light);
+        }
+      }
+    }
+  }
+  section {
+    max-width: 792px;
+    margin: 0 auto;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+    img {
+      align-self: center;
+      padding-top: 1rem;
+    }
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+</style>
