@@ -20,6 +20,10 @@
   --body: 16px;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
 h1 {
   font-family: Cabin;
   font-size: var(--heading01);
