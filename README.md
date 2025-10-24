@@ -12,23 +12,6 @@ Dette projekt demonstrerer en moderne webløsning bygget med Astro, hvor fokus h
 
 #### Succeser
 
-**Dynamisk komponentstruktur:** En af de store succeser var implementeringen af dynamiske komponenter som `DynamicIcon` og `DynamicImage`, der gør kodebasen meget mere fleksibel:
-
-```astro
-// DynamicIcon.astro
-const { name, class: className = "icon" } = Astro.props;
-let IconComponent;
-try {
-  IconComponent = await import(`../../icons/${name}.svg`).then(
-    (module) => module.default
-  );
-} catch (error) {
-  console.warn(`Icon "${name}" not found`);
-}
-```
-
-Denne løsning gør det nemt at inkludere ikoner dynamisk baseret på data fra JSON-filer, hvilket reducerer gentagelse og forbedrer vedligeholdelsen.
-
 **CSS Custom Properties til temaer:** Brugen af custom properties til at styre farver og størrelser på tværs af komponenter har været særdeles effektiv:
 
 ```css
@@ -42,7 +25,7 @@ Denne løsning gør det nemt at inkludere ikoner dynamisk baseret på data fra J
 
 Dette tillader samme komponent at have forskellige udtryk afhængigt af kontekst, som set i `CoreValues.astro`.
 
-**Avanceret Grid med Subgrid:** Implementeringen af full-width layouts med subgrid i `FinancialProjections.astro` løser et klassisk layoutproblem elegant:
+**Avanceret Grid med Subgrid:** Implementeringen af full-bleed layouts med subgrid i `FinancialProjections.astro`:
 
 ```css
 .financial-projections {
@@ -84,13 +67,14 @@ Dette giver mulighed for at bryde ud af container-bredden, mens indholdet stadig
 
 Udfordringen var at få `@property` til at virke sammen med `counter()` for at animere tal progressivt.
 
-**Responsivt layout med overlappende elementer:** Hero-sektionen med baggrundsmønstre og overlappende elementer krævede omhyggelig grid-planlægning:
+**Responsivt layout med overlappende elementer:** Hero-sektionen med baggrundsmønstre og overlappende elementer krævede meget grid-planlægning:
 
 ```css
 .hero-inner {
   display: grid;
   grid-template-columns:
-    1fr minmax(0, calc(600px - 1rem)) minmax(0, calc(600px - 1rem)) 1fr;
+    1fr minmax(0, calc(600px - 1rem)) minmax(0, calc(600px - 1rem))
+    1fr;
 }
 ```
 
@@ -112,12 +96,13 @@ I `global.css` findes:
   padding-block: 4rem;
   display: grid;
   grid-template-columns:
-    [full-start] 1fr [content] minmax(0, 1200px) 1fr [full-end];
+    [full-start] 1fr [content] minmax(0, 1200px)
+    1fr [full-end];
   column-gap: 2rem;
 }
 ```
 
-Denne container-klasse bruges konsekvent gennem hele siden og definerer named grid lines, hvilket gør det let at arbejde med full-width layouts.
+Denne container-klasse bruges konsekvent gennem hele siden og definerer named grid lines, hvilket gør det let at arbejde med full-bleed layouts.
 
 #### Komponent-specifik CSS
 
@@ -181,7 +166,7 @@ Brug af `<dl>`, `<dt>` og `<dd>` til key-value pairs forbedrer tilgængeligheden
 
 #### 2. Container Queries (implicit gennem Grid)
 
-Selvom ikke eksplicit brugt, opnås responsive behaviour gennem:
+Selvom ikke eksplicit brugt, opnås responsive behaviour gennem bl.a.:
 
 ```css
 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -217,4 +202,3 @@ Projektet demonstrerer en moderne tilgang til webdevelopment med fokus på:
 - Vedligeholdelse gennem konsistent struktur og navngivning
 
 De største læringspunkter har været arbejdet med avancerede Grid-layouts, scroll-drevne animationer og opbygningen af et skalérbart designsystem med CSS custom properties.
-

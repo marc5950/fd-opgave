@@ -2,6 +2,7 @@
 //@ts-nocheck
 import employeesData from "@data/employees.json";
 import DynamicIcon from "./helpers/DynamicIcon.astro";
+import DynamicImage from "@components/helpers/DynamicImage.astro";
 ---
 
 <section class="container">
@@ -18,7 +19,7 @@ import DynamicIcon from "./helpers/DynamicIcon.astro";
       employeesData.slice(0, 3).map((employee) => (
         <li>
           <a href={`/team/${employee.slug}`}>
-            <img src={employee.img} alt={employee.name} />
+            <DynamicImage imagePath={employee.img} altText={employee.name} />
             <p>{employee.title}</p>
           </a>
           <h3 style="--font-size: var(--heading05)">{employee.name}</h3>
